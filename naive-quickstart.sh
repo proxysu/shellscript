@@ -21,7 +21,21 @@ if [[ $(uname -m 2> /dev/null) != x86_64 ]]; then
     echo Please run this script on x86_64 machine.
     exit 1
 fi
+getPMT(){
+    if [[ -n `command -v apt-get` ]];then
+	    apt-get -qq update
+        apt-get -y -qq install curl xz-utils libnss3
 
+    elif [[ -n `command -v yum` ]]; then
+	    yum -q makecache
+        yum -y -q install curl xz nss
+    else
+        return 1
+    fi
+    return 0
+}
+
+getPMT
 NAME=naive
 #NAMESIM=naive
 VERSION=$(curl -fsSL https://api.github.com/repos/klzgrad/naiveproxy/releases/latest | grep tag_name | sed -E 's/.*"v(.*)".*/\1/')
