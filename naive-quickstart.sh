@@ -23,11 +23,11 @@ if [[ $(uname -m 2> /dev/null) != x86_64 ]]; then
 fi
 getPMT(){
     if [[ -n `command -v apt-get` ]];then
-	    apt-get -qq update
+        apt-get -qq update
         apt-get -y -qq install curl xz-utils libnss3
 
     elif [[ -n `command -v yum` ]]; then
-	    yum -q makecache
+        yum -q makecache
         yum -y -q install curl xz nss
     else
         return 1
