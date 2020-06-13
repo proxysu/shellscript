@@ -4,6 +4,19 @@
 # This file is accessible as https://install.direct/go.sh
 # Original source is located at github.com/v2ray/v2ray-core/release/install-release.sh
 
+#installed 
+# /usr/bin/kcptun-cilent/kcptun-cilent
+# /etc/kcptun-cilent/config-cilent.json
+# /etc/systemd/system/kcptun-cilent.service
+# /var/log/kcptun-cilent
+
+# systemctl start kcptun-cilent
+# systemctl stop kcptun-cilent
+# systemctl restart kcptun-cilent
+
+# remove
+# install-kcptun-cilent.sh --remove
+
 # If not specify, default meaning of return value:
 # 0: Success
 # 1: System error
