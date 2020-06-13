@@ -2,15 +2,15 @@
 * naive-quickstart.sh 是从[Trojan-quickstart.sh](https://github.com/trojan-gfw/trojan-quickstart)的基础上改写。  
 * trojan-go.sh 是从V2Ray的[install-release.sh](https://github.com/v2ray/v2ray-core/blob/master/release/install-release.sh)的安装程序基础上改写。  
 
-install-kcptun-client.sh安装位置  
-/usr/bin/kcptun-client/kcptun-client  
-/etc/kcptun-client/config-client.json  
-/etc/systemd/system/kcptun-client.service  
-/var/log/kcptun-client  
+trojan-go.sh安装位置  
+/usr/bin/trojan-go/trojan-go  
+/etc/trojan-go/config.json  
+/etc/systemd/system/trojan-go.service  
+/var/log/trojan-go  
 
-systemctl start kcptun-client  
-systemctl stop kcptun-clientclient  
-systemctl restart kcptun-client  
+systemctl start trojan-go  
+systemctl stop trojan-go  
+systemctl restart trojan-go  
 
 remove  
-install-kcptun-client.sh --remove  
+trojan-go.sh --remove  
