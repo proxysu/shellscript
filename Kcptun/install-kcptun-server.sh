@@ -359,6 +359,17 @@ checkUpdate(){
     return 0
 }
 
+setParameters(){
+    ulimit -n 65535
+    echo "ulimit -n 65535" >> ~/.bashrc
+    echo "net.core.rmem_max=26214400" >> /etc/sysctl.conf
+    echo "net.core.rmem_default=26214400" >> /etc/sysctl.conf
+    echo "net.core.wmem_max=26214400" >> /etc/sysctl.conf
+    echo "net.core.wmem_default=26214400" >> /etc/sysctl.conf
+    echo "net.core.netdev_max_backlog=2048" >> /etc/sysctl.conf
+    sysctl -p
+}
+
 main(){
     #helping information
     [[ "$HELP" == "1" ]] && Help && return
@@ -421,6 +432,7 @@ main(){
     fi
     colorEcho ${GREEN} "Kcptun-server ${NEW_VER} is installed."
     rm -rf /tmp/kcptun
+    setParameters
     return 0
 }
 
