@@ -288,7 +288,7 @@ installInitScript(){
     if [[ -n "${SYSTEMCTL_CMD}" ]]; then
         if [[ ! -f "/etc/systemd/system/kcptun-cilent.service" && ! -f "/lib/systemd/system/kcptun-cilent.service" ]]; then
             curl ${PROXY} -L -s -H "Cache-Control: no-cache" -o '/etc/systemd/system/kcptun-cilent.service' 'https://raw.githubusercontent.com/xtaci/kcptun/master/examples/kcptun.service' && \
-            sed -i "s/\/home\/user\/client_linux_amd64 -c \/home\/user\/local.json/\/usr\/bin\/kcptun\/kcptun-cilent -c \/etc\/kcptun\/config-cilent.json/g;" '/etc/systemd/system/kcptun-cilent.service' && \
+            sed -i "s/\/home\/user\/client_linux_amd64 -c \/home\/user\/local.json/\/usr\/bin\/kcptun-cilent\/kcptun-cilent -c \/etc\/kcptun-cilent\/config-cilent.json/g;" '/etc/systemd/system/kcptun-cilent.service' && \
             systemctl enable kcptun-cilent.service
         fi
 
