@@ -271,14 +271,14 @@ installKcptun(){
     if [ ! -f '/etc/kcptun-server/config-server.json' ]; then
         local PORT="$(($RANDOM + 10000))"
         local UUID="$(cat '/proc/sys/kernel/random/uuid')"
-
+        local SERVER_IP="$(curl -4 ip.sb)"
         curl ${PROXY} -L -s -H "Cache-Control: no-cache" -o '/etc/kcptun-server/config-server.json' 'https://raw.githubusercontent.com/xtaci/kcptun/master/examples/server.json' && \
         sed -i "s/2000/${PORT}/g; s/PASSWORD/${UUID}/g;" '/etc/kcptun-server/config-server.json' || {
             colorEcho ${YELLOW} "Failed to create Kcptun-server configuration file. Please create it manually."
             return 1
         }
-
-        colorEcho ${BLUE} "PORT:${PORT}"
+        
+        colorEcho ${BLUE} "Server ip and Port: ${SERVER_IP}:${PORT}"
         colorEcho ${BLUE} "Your Password:${UUID}"
     fi
 }
