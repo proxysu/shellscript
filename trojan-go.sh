@@ -4,6 +4,19 @@
 # This file is accessible as https://install.direct/go.sh
 # Original source is located at github.com/v2ray/v2ray-core/release/install-release.sh
 
+# trojan-go.sh安装位置
+# /usr/bin/trojan-go/trojan-go
+# /etc/trojan-go/config.json
+# /etc/systemd/system/trojan-go.service
+# /var/log/trojan-go
+
+# systemctl start trojan-go
+# systemctl stop trojan-go
+# systemctl restart trojan-go
+
+# remove
+# trojan-go.sh --remove
+
 # If not specify, default meaning of return value:
 # 0: Success
 # 1: System error
