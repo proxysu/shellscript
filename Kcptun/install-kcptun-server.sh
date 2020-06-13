@@ -4,6 +4,19 @@
 # This file is accessible as https://install.direct/go.sh
 # Original source is located at github.com/v2ray/v2ray-core/release/install-release.sh
 
+#installed 
+# /usr/bin/kcptun-server/kcptun-server
+# /etc/kcptun-server/config-server.json
+# /etc/systemd/system/kcptun-server.service
+# /var/log/kcptun-server
+
+# systemctl start kcptun-server
+# systemctl stop kcptun-server
+# systemctl restart kcptun-server
+
+# remove
+# install-kcptun-server.sh --remove
+
 # If not specify, default meaning of return value:
 # 0: Success
 # 1: System error
