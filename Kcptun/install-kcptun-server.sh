@@ -288,7 +288,7 @@ installInitScript(){
     if [[ -n "${SYSTEMCTL_CMD}" ]]; then
         if [[ ! -f "/etc/systemd/system/kcptun-server.service" && ! -f "/lib/systemd/system/kcptun-server.service" ]]; then
             curl ${PROXY} -L -s -H "Cache-Control: no-cache" -o '/etc/systemd/system/kcptun-server.service' 'https://raw.githubusercontent.com/xtaci/kcptun/master/examples/kcptun.service' && \
-            sed -i "s/\/home\/user\/client_linux_amd64 -c \/home\/user\/local.json/\/usr\/bin\/kcptun\/kcptun-server -c \/etc\/kcptun\/config-server.json/g;" '/etc/systemd/system/kcptun-server.service' && \
+            sed -i "s/\/home\/user\/client_linux_amd64 -c \/home\/user\/local.json/\/usr\/bin\/kcptun-server\/kcptun-server -c \/etc\/kcptun-server\/config-server.json/g;" '/etc/systemd/system/kcptun-server.service' && \
             systemctl enable kcptun-server.service
         fi
 
