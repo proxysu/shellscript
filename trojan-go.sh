@@ -408,10 +408,13 @@ install_startup_service_file() {
         install -m 644 "${TMP_DIRECTORY}example/trojan-go.service" /etc/systemd/system/trojan-go.service
         sed -i 's/usr\/bin\/trojan-go/usr\/local\/bin\/trojan-go/' /etc/systemd/system/trojan-go.service
         sed -i 's/etc\/trojan-go/usr\/local\/etc\/trojan-go/' /etc/systemd/system/trojan-go.service
+        sed -i 's/User=nobody/#User=nobody/' /etc/systemd/system/trojan-go.service
         
         install -m 644 "${TMP_DIRECTORY}example/trojan-go@.service" /etc/systemd/system/trojan-go@.service
         sed -i 's/usr\/bin\/trojan-go/usr\/local\/bin\/trojan-go/' /etc/systemd/system/trojan-go@.service
         sed -i 's/etc\/trojan-go/usr\/local\/etc\/trojan-go/' /etc/systemd/system/trojan-go@.service
+        sed -i 's/User=nobody/#User=nobody/' /etc/systemd/system/trojan-go@.service
+        
         SYSTEMD='1'
     fi
 }
