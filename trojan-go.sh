@@ -19,6 +19,8 @@
 # /usr/local/etc/trojan-go/config.json
 # /etc/systemd/system/trojan-go.service
 # /etc/systemd/system/trojan-go@.service
+# /usr/share/trojan-go/geoip.dat
+# /usr/share/trojan-go/geosite.dat
 # /var/log/trojan-go
 
 # systemctl start trojan-go
