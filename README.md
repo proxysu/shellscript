@@ -1,5 +1,5 @@
 # shellscript  
-* naive-quickstart.sh 是从[Trojan-quickstart.sh](https://github.com/trojan-gfw/trojan-quickstart)的基础上改写。  
+* naive-quickstart.sh 是从[Trojan-quickstart.sh](https://github.com/trojan-gfw/trojan-quickstart)的基础上改写-------已弃用。  
 * trojan-go.sh 是从V2Ray的[install-release.sh](https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)的安装程序基础上改写。  
 
 trojan-go.sh安装位置  
