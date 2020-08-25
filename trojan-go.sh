@@ -397,8 +397,41 @@ install_trojan-go() {
 
 install_startup_service_file() {
     if [[ ! -f '/etc/systemd/system/trojan-go.service' ]]; then
-       # mkdir "${TMP_DIRECTORY}systemd/system/"
-       # install_software curl
+        mkdir "${TMP_DIRECTORY}systemd/system/"
+        install_software curl
+                cat > "${TMP_DIRECTORY}systemd/system/trojan-go.service" <<-EOF
+[Unit]
+Description=Trojan-go Service
+After=network.target nss-lookup.target
+[Service]
+User=nobody
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+#Environment=V2RAY_LOCATION_ASSET=/usr/local/share/v2ray/
+ExecStart=/usr/local/bin/trojan-go -config /usr/local/etc/trojan-go/config.json
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+        cat > "${TMP_DIRECTORY}systemd/system/trojan-go@.service" <<-EOF
+[Unit]
+Description=Trojan-go Service
+After=network.target nss-lookup.target
+[Service]
+User=nobody
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+#Environment=V2RAY_LOCATION_ASSET=/usr/local/share/v2ray/
+ExecStart=/usr/local/bin/trojan-go -config /usr/local/etc/trojan-go/%i.json
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+        install -m 644 "${TMP_DIRECTORY}systemd/system/trojan-go.service" /etc/systemd/system/trojan-go.service
+        install -m 644 "${TMP_DIRECTORY}systemd/system/trojan-go@.service" /etc/systemd/system/trojan-go@.service
+        
        # if ! curl ${PROXY} -s -o "${TMP_DIRECTORY}systemd/system/v2ray.service" 'https://raw.githubusercontent.workers.dev/v2fly/fhs-install-v2ray/master/systemd/system/v2ray.service'; then
             # echo 'error: Failed to start service file download! Please check your network or try again.'
             # exit 1
@@ -407,15 +440,15 @@ install_startup_service_file() {
             # echo 'error: Failed to start service file download! Please check your network or try again.'
             # exit 1
         # fi
-        install -m 644 "${TMP_DIRECTORY}example/trojan-go.service" /etc/systemd/system/trojan-go.service
-        sed -i 's/usr\/bin\/trojan-go/usr\/local\/bin\/trojan-go/' /etc/systemd/system/trojan-go.service
-        sed -i 's/etc\/trojan-go/usr\/local\/etc\/trojan-go/' /etc/systemd/system/trojan-go.service
+        #install -m 644 "${TMP_DIRECTORY}example/trojan-go.service" /etc/systemd/system/trojan-go.service
+        #sed -i 's/usr\/bin\/trojan-go/usr\/local\/bin\/trojan-go/' /etc/systemd/system/trojan-go.service
+        #sed -i 's/etc\/trojan-go/usr\/local\/etc\/trojan-go/' /etc/systemd/system/trojan-go.service
        # sed -i 's/User=nobody/#User=nobody/' /etc/systemd/system/trojan-go.service
 
         
-        install -m 644 "${TMP_DIRECTORY}example/trojan-go@.service" /etc/systemd/system/trojan-go@.service
-        sed -i 's/usr\/bin\/trojan-go/usr\/local\/bin\/trojan-go/' /etc/systemd/system/trojan-go@.service
-        sed -i 's/etc\/trojan-go/usr\/local\/etc\/trojan-go/' /etc/systemd/system/trojan-go@.service
+        #install -m 644 "${TMP_DIRECTORY}example/trojan-go@.service" /etc/systemd/system/trojan-go@.service
+        #sed -i 's/usr\/bin\/trojan-go/usr\/local\/bin\/trojan-go/' /etc/systemd/system/trojan-go@.service
+        #sed -i 's/etc\/trojan-go/usr\/local\/etc\/trojan-go/' /etc/systemd/system/trojan-go@.service
        # sed -i 's/User=nobody/#User=nobody/' /etc/systemd/system/trojan-go@.service
         
         SYSTEMD='1'
