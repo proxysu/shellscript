@@ -397,9 +397,9 @@ install_trojan-go() {
 
 install_startup_service_file() {
     if [[ ! -f '/etc/systemd/system/trojan-go.service' ]]; then
-        mkdir "${TMP_DIRECTORY}systemd/system/"
-        install_software curl
-                cat > "${TMP_DIRECTORY}systemd/system/trojan-go.service" <<-EOF
+        mkdir -p "${TMP_DIRECTORY}systemd/system/"
+        #install_software curl
+        cat > "${TMP_DIRECTORY}systemd/system/trojan-go.service" <<-EOF
 [Unit]
 Description=Trojan-go Service
 After=network.target nss-lookup.target
