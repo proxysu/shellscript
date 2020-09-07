@@ -502,11 +502,11 @@ install_cleanup(){
 
 # Uninstall ShadowsocksR
 uninstall_shadowsocksr(){
-   # printf "Are you sure uninstall ShadowsocksR? (y/n)"
-   # printf "\n"
-   # read -p "(Default: n):" answer
-   # [ -z ${answer} ] && answer="n"
-   # if [ "${answer}" == "y" ] || [ "${answer}" == "Y" ]; then
+    # printf "Are you sure uninstall ShadowsocksR? (y/n)"
+    # printf "\n"
+    # read -p "(Default: n):" answer
+    # [ -z ${answer} ] && answer="n"
+    # if [ "${answer}" == "y" ] || [ "${answer}" == "Y" ]; then
         systemctl stop ssr
         systemctl disable ssr
         rm -f /etc/systemd/system/ssr.service
@@ -524,11 +524,11 @@ uninstall_shadowsocksr(){
         rm -f /var/log/shadowsocks.log
         rm -rf /usr/local/shadowsocks
         echo "ShadowsocksR uninstall success!"
-   # else
-   #     echo
-   #     echo "uninstall cancelled, nothing to do..."
-   #     echo
-   # fi
+    # else
+        # echo
+        # echo "uninstall cancelled, nothing to do..."
+        # echo
+    # fi
 }
 
 # Install ShadowsocksR
