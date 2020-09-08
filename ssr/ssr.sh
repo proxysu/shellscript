@@ -454,7 +454,7 @@ After=network.target network-online.target nss-lookup.target mysql.service maria
 [Service]
 Type=simple
 StandardError=journal
-ExecStart=/usr/bin/python /usr/local/shadowsocks/server.py -c /etc/shadowsocks.json
+ExecStart=/usr/bin/ssr /usr/local/shadowsocks/server.py -c /etc/shadowsocks.json
 ExecReload=/bin/kill -HUP \$MAINPID
 LimitNOFILE=51200
 Restart=on-failure
@@ -536,6 +536,7 @@ install_shadowsocksr(){
     # disable_selinux
     #pre_install
     ln -s /usr/bin/python3 /usr/bin/python
+    ln -s /usr/bin/python /usr/bin/ssr
     download_files
     config_shadowsocks
     # if check_sys packageManager yum; then
