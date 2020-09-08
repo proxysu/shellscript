@@ -200,7 +200,7 @@ check_sys(){
 # }
 
 # Pre-installation settings
-# pre_install(){
+pre_install(){
     # # if check_sys packageManager dnf || check_sys packageManager yum || check_sys packageManager apt; then
         # # # Not support CentOS 5
         # # if centosversion 5; then
@@ -336,7 +336,7 @@ check_sys(){
         apt -y update
         apt -y -qq install python python-dev python-setuptools  openssl libssl-dev curl wget unzip gcc automake autoconf make libtool
     fi
-    cd ${cur_dir}
+    # cd ${cur_dir}
 }
 
 # Download files
