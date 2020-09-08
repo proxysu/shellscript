@@ -98,66 +98,66 @@ plain='\033[0m'
 # }
 
 #Check system
-# check_sys(){
-    # local checkType=$1
-    # local value=$2
+check_sys(){
+    local checkType=$1
+    local value=$2
 
-    # local release=''
-    # local systemPackage=''
+    local release=''
+    local systemPackage=''
 
-    # if [[ -f /etc/redhat-release ]]; then
-        # release="centos"
-        # systemPackage="yum"
-        # if [[ "$(command -v dnf)" ]]; then
-                # release="centos"
-                # systemPackage="dnf"
-        # fi
-    # elif grep -Eqi "debian|raspbian" /etc/issue; then
-        # release="debian"
-        # systemPackage="apt"
-    # elif grep -Eqi "ubuntu" /etc/issue; then
-        # release="ubuntu"
-        # systemPackage="apt"
-    # elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
-        # release="centos"
-        # systemPackage="yum"
-         # if [[ "$(command -v dnf)" ]]; then
-                # release="centos"
-                # systemPackage="dnf"
-        # fi
-    # elif grep -Eqi "debian|raspbian" /proc/version; then
-        # release="debian"
-        # systemPackage="apt"
-    # elif grep -Eqi "ubuntu" /proc/version; then
-        # release="ubuntu"
-        # systemPackage="apt"
-    # elif grep -Eqi "centos|red hat|redhat" /proc/version; then
-        # release="centos"
-        # systemPackage="yum"
-         # if [[ "$(command -v dnf)" ]]; then
-                # release="centos"
-                # systemPackage="dnf"
-        # fi
-    # elif [[ "$(command -v dnf)" ]]; then
-        # release="centos"
-        # systemPackage="dnf"
+    if [[ -f /etc/redhat-release ]]; then
+        release="centos"
+        systemPackage="yum"
+        if [[ "$(command -v dnf)" ]]; then
+                release="centos"
+                systemPackage="dnf"
+        fi
+    elif grep -Eqi "debian|raspbian" /etc/issue; then
+        release="debian"
+        systemPackage="apt"
+    elif grep -Eqi "ubuntu" /etc/issue; then
+        release="ubuntu"
+        systemPackage="apt"
+    elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
+        release="centos"
+        systemPackage="yum"
+         if [[ "$(command -v dnf)" ]]; then
+                release="centos"
+                systemPackage="dnf"
+        fi
+    elif grep -Eqi "debian|raspbian" /proc/version; then
+        release="debian"
+        systemPackage="apt"
+    elif grep -Eqi "ubuntu" /proc/version; then
+        release="ubuntu"
+        systemPackage="apt"
+    elif grep -Eqi "centos|red hat|redhat" /proc/version; then
+        release="centos"
+        systemPackage="yum"
+         if [[ "$(command -v dnf)" ]]; then
+                release="centos"
+                systemPackage="dnf"
+        fi
+    elif [[ "$(command -v dnf)" ]]; then
+        release="centos"
+        systemPackage="dnf"
 
-    # fi
+    fi
 
-    # if [[ "${checkType}" == "sysRelease" ]]; then
-        # if [ "${value}" == "${release}" ]; then
-            # return 0
-        # else
-            # return 1
-        # fi
-    # elif [[ "${checkType}" == "packageManager" ]]; then
-        # if [ "${value}" == "${systemPackage}" ]; then
-            # return 0
-        # else
-            # return 1
-        # fi
-    # fi
-# }
+    if [[ "${checkType}" == "sysRelease" ]]; then
+        if [ "${value}" == "${release}" ]; then
+            return 0
+        else
+            return 1
+        fi
+    elif [[ "${checkType}" == "packageManager" ]]; then
+        if [ "${value}" == "${systemPackage}" ]; then
+            return 0
+        else
+            return 1
+        fi
+    fi
+}
 
 # Get version
 # getversion(){
