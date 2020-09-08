@@ -325,20 +325,19 @@ plain='\033[0m'
     # # echo "Press any key to start...or Press Ctrl+C to cancel"
     # # char=`get_char`
     
-    # # Install necessary dependencies
-    # if check_sys packageManager dnf; then
-        # # dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-        # # dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-        # ln -s /usr/bin/python3 /usr/bin/python
-    # elif check_sys packageManager yum; then
-        # # yum install -y -q python python-devel python-setuptools openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-        # yum install -y -q python python-devel python-setuptools # openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-    # elif check_sys packageManager apt; then
-        # apt -y update
-        # apt -y -qq install python python-dev python-setuptools # openssl libssl-dev curl wget unzip gcc automake autoconf make libtool
-    # fi
-    # cd ${cur_dir}
-# }
+    # Install necessary dependencies
+    if check_sys packageManager dnf; then
+        # dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+         dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+    elif check_sys packageManager yum; then
+        # yum install -y -q python python-devel python-setuptools openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+        yum install -y -q python python-devel python-setuptools  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+    elif check_sys packageManager apt; then
+        apt -y update
+        apt -y -qq install python python-dev python-setuptools  openssl libssl-dev curl wget unzip gcc automake autoconf make libtool
+    fi
+    cd ${cur_dir}
+}
 
 # Download files
 download_files(){
