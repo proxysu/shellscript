@@ -98,66 +98,66 @@ plain='\033[0m'
 # }
 
 #Check system
-check_sys(){
-    local checkType=$1
-    local value=$2
+# check_sys(){
+    # local checkType=$1
+    # local value=$2
 
-    local release=''
-    local systemPackage=''
+    # local release=''
+    # local systemPackage=''
 
-    if [[ -f /etc/redhat-release ]]; then
-        release="centos"
-        systemPackage="yum"
-        if [[ "$(command -v dnf)" ]]; then
-                release="centos"
-                systemPackage="dnf"
-        fi
-    elif grep -Eqi "debian|raspbian" /etc/issue; then
-        release="debian"
-        systemPackage="apt"
-    elif grep -Eqi "ubuntu" /etc/issue; then
-        release="ubuntu"
-        systemPackage="apt"
-    elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
-        release="centos"
-        systemPackage="yum"
-         if [[ "$(command -v dnf)" ]]; then
-                release="centos"
-                systemPackage="dnf"
-        fi
-    elif grep -Eqi "debian|raspbian" /proc/version; then
-        release="debian"
-        systemPackage="apt"
-    elif grep -Eqi "ubuntu" /proc/version; then
-        release="ubuntu"
-        systemPackage="apt"
-    elif grep -Eqi "centos|red hat|redhat" /proc/version; then
-        release="centos"
-        systemPackage="yum"
-         if [[ "$(command -v dnf)" ]]; then
-                release="centos"
-                systemPackage="dnf"
-        fi
-    elif [[ "$(command -v dnf)" ]]; then
-        release="centos"
-        systemPackage="dnf"
+    # if [[ -f /etc/redhat-release ]]; then
+        # release="centos"
+        # systemPackage="yum"
+        # if [[ "$(command -v dnf)" ]]; then
+                # release="centos"
+                # systemPackage="dnf"
+        # fi
+    # elif grep -Eqi "debian|raspbian" /etc/issue; then
+        # release="debian"
+        # systemPackage="apt"
+    # elif grep -Eqi "ubuntu" /etc/issue; then
+        # release="ubuntu"
+        # systemPackage="apt"
+    # elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
+        # release="centos"
+        # systemPackage="yum"
+         # if [[ "$(command -v dnf)" ]]; then
+                # release="centos"
+                # systemPackage="dnf"
+        # fi
+    # elif grep -Eqi "debian|raspbian" /proc/version; then
+        # release="debian"
+        # systemPackage="apt"
+    # elif grep -Eqi "ubuntu" /proc/version; then
+        # release="ubuntu"
+        # systemPackage="apt"
+    # elif grep -Eqi "centos|red hat|redhat" /proc/version; then
+        # release="centos"
+        # systemPackage="yum"
+         # if [[ "$(command -v dnf)" ]]; then
+                # release="centos"
+                # systemPackage="dnf"
+        # fi
+    # elif [[ "$(command -v dnf)" ]]; then
+        # release="centos"
+        # systemPackage="dnf"
 
-    fi
+    # fi
 
-    if [[ "${checkType}" == "sysRelease" ]]; then
-        if [ "${value}" == "${release}" ]; then
-            return 0
-        else
-            return 1
-        fi
-    elif [[ "${checkType}" == "packageManager" ]]; then
-        if [ "${value}" == "${systemPackage}" ]; then
-            return 0
-        else
-            return 1
-        fi
-    fi
-}
+    # if [[ "${checkType}" == "sysRelease" ]]; then
+        # if [ "${value}" == "${release}" ]; then
+            # return 0
+        # else
+            # return 1
+        # fi
+    # elif [[ "${checkType}" == "packageManager" ]]; then
+        # if [ "${value}" == "${systemPackage}" ]; then
+            # return 0
+        # else
+            # return 1
+        # fi
+    # fi
+# }
 
 # Get version
 # getversion(){
@@ -200,7 +200,7 @@ check_sys(){
 # }
 
 # Pre-installation settings
-pre_install(){
+# pre_install(){
     # # if check_sys packageManager dnf || check_sys packageManager yum || check_sys packageManager apt; then
         # # # Not support CentOS 5
         # # if centosversion 5; then
@@ -326,18 +326,18 @@ pre_install(){
     # # char=`get_char`
     
     # Install necessary dependencies
-    if check_sys packageManager dnf; then
-        # dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-         dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-    elif check_sys packageManager yum; then
-        # yum install -y -q python python-devel python-setuptools openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-        yum install -y -q python python-devel python-setuptools  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-    elif check_sys packageManager apt; then
-        apt -y update
-        apt -y -qq install python python-dev python-setuptools  openssl libssl-dev curl wget unzip gcc automake autoconf make libtool
-    fi
+    # if check_sys packageManager dnf; then
+        # # dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+         # dnf install -y -q  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+    # elif check_sys packageManager yum; then
+        # # yum install -y -q python python-devel python-setuptools openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+        # yum install -y -q python python-devel python-setuptools  openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+    # elif check_sys packageManager apt; then
+        # apt -y update
+        # apt -y -qq install python python-dev python-setuptools  openssl libssl-dev curl wget unzip gcc automake autoconf make libtool
+    # fi
     # cd ${cur_dir}
-}
+# }
 
 # Download files
 download_files(){
@@ -348,7 +348,8 @@ download_files(){
         # exit 1
     # fi
     # Download ShadowsocksR file
-    if ! wget --no-check-certificate -O ${shadowsocks_r_file}.tar.gz ${shadowsocks_r_url}; then
+    #if ! wget --no-check-certificate -O ${shadowsocks_r_file}.tar.gz ${shadowsocks_r_url}; then
+    if ! curl -Lo ${shadowsocks_r_file}.tar.gz ${shadowsocks_r_url}; then
         echo -e "[${red}Error${plain}] Failed to download ShadowsocksR file!"
         exit 1
     fi
@@ -533,15 +534,15 @@ uninstall_shadowsocksr(){
 # Install ShadowsocksR
 install_shadowsocksr(){
     # disable_selinux
-    pre_install
+    # pre_install
     ln -s /usr/bin/python3 /usr/bin/python
     ln -s /usr/bin/python /usr/bin/ssr
     download_files
-    config_shadowsocks
     # if check_sys packageManager yum; then
         # firewall_set
     # fi
     install
+    config_shadowsocks
     install_cleanup
 }
 
