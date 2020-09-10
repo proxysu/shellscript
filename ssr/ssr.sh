@@ -482,10 +482,11 @@ EOF
         # echo -e "Your Encryption Method: \033[41;37m ${shadowsockscipher} \033[0m"
         # echo
         # echo "Welcome to visit:https://shadowsocks.be/9.html"
+        echo
         echo "ShadowsocksR installed successfully! "
         echo "Please execute the command: systemctl enable ssr; systemctl start ssr"
         echo "Enjoy it!"
-        # echo
+        echo
     else
         echo "ShadowsocksR install failed, please Email to ProxySU <proxysetuptools@gmail.com> and contact"
         install_cleanup
