@@ -85,7 +85,7 @@ plain='\033[0m'
 get_latest_version(){
     # ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/shadowsocks/shadowsocks-libev/releases/latest | grep 'tag_name' | cut -d\" -f4)
     ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/cbeuw/Cloak/releases/latest | grep 'tag_name' | cut -d\" -f4)
-    [ -z "${ver}" ] && echo "Error: Get cloak-plugin latest version failed" && exit 1
+    [ -z "${ver}" ] && echo "Error: Get cloak-plugin-server latest version failed" && exit 1
     cloak_plugin_ver="ck-server-linux-amd64-$(echo "${ver}" | sed -e 's/^[a-zA-Z]//g')"
     #cloak_plugin_ver="v2ray-plugin-linux-amd64-${ver}"
     download_link="https://github.com/cbeuw/Cloak/releases/download/${ver}/${cloak_plugin_ver}"
@@ -107,10 +107,10 @@ check_installed(){
 }
 
 check_version(){
-    check_installed "cloak-plugin"
+    check_installed "cloak-plugin-server"
     if [ $? -eq 0 ]; then
-        # installed_ver=$(cloak-plugin -v | grep cloak-plugin | cut -d' ' -f2)
-        installed_ver=$(cloak-plugin -v | cut -d' ' -f2)
+        # installed_ver=$(cloak-plugin-server -v | grep cloak-plugin-server | cut -d' ' -f2)
+        installed_ver=$(cloak-plugin-server -v | cut -d' ' -f2)
         get_latest_version
         latest_ver=$(echo "${ver}" | sed -e 's/^[a-zA-Z]//g')
         # latest_ver="${ver}"
@@ -243,7 +243,7 @@ pre_install(){
     elif [ ${status} -eq 1 ]; then
         echo -e "Installed version: ${red}${installed_ver}${plain}"
         echo -e "Latest version: ${red}${latest_ver}${plain}"
-        echo -e "[${green}Info${plain}] Upgrade cloak-plugin to latest version..."
+        echo -e "[${green}Info${plain}] Upgrade cloak-plugin-server to latest version..."
         # ps -ef | grep -v grep | grep -i "ss-server" > /dev/null 2>&1
         # if [ $? -eq 0 ]; then
             # #/etc/init.d/shadowsocks stop
@@ -417,14 +417,14 @@ install_shadowsocks(){
     cd "${cur_dir}" || exit
     # tar zxf "${cloak_plugin_ver}".tar.gz
     #cd "${cloak_plugin_ver}" || exit
-    if [ -f /usr/local/bin/cloak-plugin ]; then
-        rm -f /usr/local/bin/cloak-plugin
+    if [ -f /usr/local/bin/cloak-plugin-server ]; then
+        rm -f /usr/local/bin/cloak-plugin-server
     fi
-    cp "${cloak_plugin_ver}" /usr/local/bin/cloak-plugin
+    cp "${cloak_plugin_ver}" /usr/local/bin/cloak-plugin-server
     # ./configure --disable-documentation
     # make && make install
-    if [ -f /usr/local/bin/cloak-plugin ]; then
-        chmod +x /usr/local/bin/cloak-plugin
+    if [ -f /usr/local/bin/cloak-plugin-server ]; then
+        chmod +x /usr/local/bin/cloak-plugin-server
         echo
         echo "cloak-plugin server installed successfully! "
         echo "Enjoy it!"
@@ -441,7 +441,7 @@ install_shadowsocks(){
         # fi
     else
         echo
-        echo -e "[${red}Error${plain}] cloak-plugin install failed. please visit https://github.com/proxysu/windows and contact."
+        echo -e "[${red}Error${plain}] cloak-plugin-server install failed. please visit https://github.com/proxysu/windows and contact."
         exit 1
     fi
 
@@ -508,8 +508,8 @@ uninstall_shadowsocks_libev(){
         # rm -f /usr/local/share/man/man8/shadowsocks-libev.8
         # rm -fr /usr/local/share/doc/shadowsocks-libev
         # rm -f /etc/init.d/shadowsocks
-        rm -f /usr/local/bin/cloak-plugin
-        echo "cloak-plugin uninstall success!"
+        rm -f /usr/local/bin/cloak-plugin-server
+        echo "cloak-plugin-server uninstall success!"
     # else
         # echo
         # echo "uninstall cancelled, nothing to do..."

@@ -85,7 +85,7 @@ plain='\033[0m'
 get_latest_version(){
     # ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/shadowsocks/shadowsocks-libev/releases/latest | grep 'tag_name' | cut -d\" -f4)
     ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/shadowsocks/kcptun/releases/latest | grep 'tag_name' | cut -d\" -f4)
-    [ -z "${ver}" ] && echo "Error: Get kcptun-plugin latest version failed" && exit 1
+    [ -z "${ver}" ] && echo "Error: Get kcptun-plugin-server latest version failed" && exit 1
     kcptun_plugin_ver="kcptun-linux-amd64-$(echo "${ver}" | sed -e 's/^[a-zA-Z]//g')"
     #kcptun_plugin_ver="v2ray-plugin-linux-amd64-${ver}"
     download_link="https://github.com/shadowsocks/kcptun/releases/download/${ver}/${kcptun_plugin_ver}.tar.gz"
@@ -107,10 +107,10 @@ check_installed(){
 }
 
 check_version(){
-    check_installed "kcptun-plugin"
+    check_installed "kcptun-plugin-server"
     if [ $? -eq 0 ]; then
-        # installed_ver=$(kcptun-plugin -v | grep v2ray-plugin | cut -d' ' -f2)
-        installed_ver=$(kcptun-plugin -v | grep kcptun | cut -d' ' -f3)
+        # installed_ver=$(kcptun-plugin-server -v | grep v2ray-plugin | cut -d' ' -f2)
+        installed_ver=$(kcptun-plugin-server -v | grep kcptun | cut -d' ' -f3)
         get_latest_version
         latest_ver=$(echo "${ver}" | sed -e 's/^[a-zA-Z]//g')
         # latest_ver="${ver}"
@@ -243,7 +243,7 @@ pre_install(){
     elif [ ${status} -eq 1 ]; then
         echo -e "Installed version: ${red}${installed_ver}${plain}"
         echo -e "Latest version: ${red}${latest_ver}${plain}"
-        echo -e "[${green}Info${plain}] Upgrade kcptun-plugin to latest version..."
+        echo -e "[${green}Info${plain}] Upgrade kcptun-plugin-server to latest version..."
         # ps -ef | grep -v grep | grep -i "ss-server" > /dev/null 2>&1
         # if [ $? -eq 0 ]; then
             # #/etc/init.d/shadowsocks stop
@@ -417,14 +417,14 @@ install_shadowsocks(){
     cd "${cur_dir}" || exit
     tar zxf "${kcptun_plugin_ver}".tar.gz
     #cd "${kcptun_plugin_ver}" || exit
-    if [ -f /usr/local/bin/kcptun-plugin ]; then
-        rm -f /usr/local/bin/kcptun-plugin
+    if [ -f /usr/local/bin/kcptun-plugin-server ]; then
+        rm -f /usr/local/bin/kcptun-plugin-server
     fi
-    cp server_linux_amd64 /usr/local/bin/kcptun-plugin
+    cp server_linux_amd64 /usr/local/bin/kcptun-plugin-server
     # ./configure --disable-documentation
     # make && make install
-    if [ -f /usr/local/bin/kcptun-plugin ]; then
-        chmod +x /usr/local/bin/kcptun-plugin
+    if [ -f /usr/local/bin/kcptun-plugin-server ]; then
+        chmod +x /usr/local/bin/kcptun-plugin-server
         echo
         echo "kcptun-plugin server installed successfully! "
         echo "Enjoy it!"
@@ -508,8 +508,8 @@ uninstall_shadowsocks_libev(){
         # rm -f /usr/local/share/man/man8/shadowsocks-libev.8
         # rm -fr /usr/local/share/doc/shadowsocks-libev
         # rm -f /etc/init.d/shadowsocks
-        rm -f /usr/local/bin/kcptun-plugin
-        echo "kcptun-plugin uninstall success!"
+        rm -f /usr/local/bin/kcptun-plugin-server
+        echo "kcptun-plugin-server uninstall success!"
     # else
         # echo
         # echo "uninstall cancelled, nothing to do..."
