@@ -594,12 +594,14 @@ EOF
 
 # Install Shadowsocks-libev
 install_shadowsocks_libev(){
+    if [ ! -f /usr/local/bin/ss-server ];then
     #disable_selinux
     pre_install
     download_files
     config_shadowsocks
     #firewall_set
     install_shadowsocks
+    fi
 }
 
 # Uninstall Shadowsocks-libev
