@@ -86,9 +86,10 @@ get_latest_version(){
     # ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/shadowsocks/shadowsocks-libev/releases/latest | grep 'tag_name' | cut -d\" -f4)
     ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/cbeuw/Cloak/releases/latest | grep 'tag_name' | cut -d\" -f4)
     [ -z "${ver}" ] && echo "Error: Get cloak-plugin-server latest version failed" && exit 1
-    cloak_plugin_ver="ck-server-linux-amd64-$(echo "${ver}" | sed -e 's/^[a-zA-Z]//g')"
-    #cloak_plugin_ver="v2ray-plugin-linux-amd64-${ver}"
+    #cloak_plugin_ver="ck-server-linux-amd64-$(echo "${ver}" | sed -e 's/^[a-zA-Z]//g')"
+    cloak_plugin_ver="ck-server-linux-amd64-${ver}"
     download_link="https://github.com/cbeuw/Cloak/releases/download/${ver}/${cloak_plugin_ver}"
+    #echo ${download_link}
     # init_script_link="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev-debian"
 }
 
