@@ -524,6 +524,7 @@ uninstall_shadowsocksr(){
         #rm -f /etc/init.d/shadowsocks
         rm -f /var/log/shadowsocks.log
         rm -rf /usr/local/shadowsocks
+        rm -f /usr/bin/ssr
         echo "ShadowsocksR uninstall success!"
     # else
         # echo
