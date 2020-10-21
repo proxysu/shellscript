@@ -177,7 +177,7 @@ WantedBy=multi-user.target
 EOF
 
 cat > "/usr/local/etc/mtg.sh" <<-EOF
-/usr/local/bin/mtg run ${public_ip} ${secret} ${adtag} > /usr/local/etc/mtg_info.json
+/usr/local/bin/mtg run ${public_ip} ${secret} ${adtag} > /usr/local/etc/mtg_info.json &
 EOF
         echo
         echo "mtg server installed successfully! "
