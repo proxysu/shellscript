@@ -50,6 +50,7 @@ get_caddy() {
 
     $(which mkdir) -p "/etc/caddy"
     printf "Cretated: %s\n" "/etc/caddy"
+    echo "OK" > /etc/caddy/naive
 
     wget "${caddy_link}" -O /tmp/caddy.zip && unzip /tmp/caddy.zip -d /usr/bin/ && $(which chmod) +x /usr/bin/caddy
     printf "Installed: %s\n" "/usr/bin/caddy"
