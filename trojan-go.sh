@@ -404,9 +404,10 @@ install_startup_service_file() {
 Description=Trojan-go Service
 After=network.target nss-lookup.target
 [Service]
-User=nobody
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#User=nobody
+User=root
+#CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 #Environment=V2RAY_LOCATION_ASSET=/usr/local/share/v2ray/
 ExecStart=/usr/local/bin/trojan-go -config /usr/local/etc/trojan-go/config.json
@@ -419,9 +420,10 @@ EOF
 Description=Trojan-go Service
 After=network.target nss-lookup.target
 [Service]
-User=nobody
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#User=nobody
+User=root
+#CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 #Environment=V2RAY_LOCATION_ASSET=/usr/local/share/v2ray/
 ExecStart=/usr/local/bin/trojan-go -config /usr/local/etc/trojan-go/%i.json
